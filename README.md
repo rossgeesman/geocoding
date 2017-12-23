@@ -16,4 +16,6 @@ I chose to make requests to the server asynchronously with JS. When a response i
 ## Sinatra
 I've never used Sinatra before but I had fun playing with it. I kept things pretty minimal and only added a single `/address` route for the client to talk to. Also, since I wrote a bit of JS and got annoyed purging my browser cache, I added versioning so cached scripts will be expired regularly.
 
+I didn't sort the address list because I was short for time this week. If I did implement this in the existing code, I would probably maintain a sorted array of the distance-to-whitehouse numbers on the client and then append the new addresses onto the list in the proper position.
+
 
