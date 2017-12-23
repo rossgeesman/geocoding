@@ -24,11 +24,7 @@ function getAddress(coordinates) {
 }
 
 function addressListItem(address) {
-  return "<li class='list-group-item'>" +
-    address['address'] +
-    "<br> Distance to Whitehouse: " +
-    Math.round(address['distance_to_whitehouse']) + " miles" +
-    "</li>"
+  return "<li class='list-group-item'>" + address['address'] + "<br> Distance to Whitehouse: " + Math.round(address['distance_to_whitehouse']) + " miles" + "</li>"
 }
 
 $("#addressSearch").on("submit", function(event) {

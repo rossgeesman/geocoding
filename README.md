@@ -1,40 +1,19 @@
-# Interview exercise
+# Excercise Overview
 
-This exercise is, first and foremost, something fun to work on. It's designed to give you a taste of what it's like to 
-work at Airspace and for us to get a sense of how you program. There are 3 tasks to work through. If you have any questions 
-at all please shoot us an email and we'll reply as soon as we can. 
+## Setup
+You can setup and run this app as described in the original repo. 
 
-## Get started
-Assuming you have a working Ruby environment, from the repo root do:
+Here are the main features:
 
-1. `bundle install`
-2. `rackup -p 4567`
-3. Browse to [http://localhost:4567](http://localhost:4567)
+## Address Class
+I took some clues from the existing Address spec tests and implemented the class. An addresss can be instantiated with either geographic coordinates (lat, lng) or with a street address string. Calling `#geocode!` on the address uses the Geocoder gem to lookup and add missing data to the Address object's internal state. None of this data is persisted server-side but it seems that the Geocoder gem provides some nice integration points for ActiveRecord so it would be easy to do so.
 
-Upon success you'll have a working [Sinatra](https://github.com/sinatra/sinatra) application to play with.
+The `#geocode!` method handles errors that might be raised by the Geocoder gem however the gem is inconsistent and sometimes simply prints the errors. I chose to raise errors within the `#geocode!` method if this happens but I suppose that is debatable.
 
-4. Run tests with `rspec spec`
+## Frontend/UI
+I chose to make requests to the server asynchronously with JS. When a response is received, the address data is appended to the list of addresses. Errors are just alerted through the browser. If I had more time, I would have implemented nicer error display using Bootstrap modals or flash messages. Also, the UI is a little ugly and I think it would have been nice to make the "distance to Whitehouse" calculation be optional, instead of using a single API request.
 
-## Task #1: Reverse geocode and display addresses
-Given the following coordinates:
+## Sinatra
+I've never used Sinatra before but I had fun playing with it. I kept things pretty minimal and only added a single `/address` route for the client to talk to. Also, since I wrote a bit of JS and got annoyed purging my browser cache, I added versioning so cached scripts will be expired regularly.
 
-```
-   Latitude   Longitude
-  ----------------------
-  61.582195, -149.443512
-  44.775211, -68.774184
-  25.891297, -97.393349
-  45.787839, -108.502110
-  35.109937, -89.959983
-```
 
-render a web page that displays the addresses of each. Use the [Geocoder gem](https://github.com/alexreisner/geocoder) 
-to get the addresses.
-
-## Task #2: Improve display
-Use [Bootstrap](https://getbootstrap.com/) to make the page from task #1 look better.
-
-## Task #3: Calculate and display distance
-Calculate the distance between each of the above coordinates and The White House, which is located at
-**1600 Pennsylvania Avenue NW Washington, D.C. 20500**. Update the web page from task #2 to list each address and its
-determined distance in ascending order.
