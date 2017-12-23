@@ -1,7 +1,7 @@
 # Excercise Overview
 
 ## Setup
-You can setup and run this app as described in the original repo. 
+You can setup and run this app as described in the original repo. Run tests with `rspec spec`.
 
 Here are the main features:
 
